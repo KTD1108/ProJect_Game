@@ -3,34 +3,41 @@
 
 #include "../include/BaseObject.h"
 
-#define BULLET_WIDTH 36
-#define BULLET_HEIGHT 5
-#define BULLET_SPEED 3
+#define WIDTH_LASER 35
+#define HEIGHT_LASER 5
+
+#define WIDTH_SPHERE 10
+#define HEIGHT_SPHERE 10
 
 class BulletObject : public BaseObject
 {
 public:
+    enum AmoType
+  {
+    NONE = 0,
+    LASER = 1,
+    SPHERE = 2
+  };
     BulletObject();
     ~BulletObject();
 
+   
+    void HandleInputAction(SDL_Event events);
     void HandleMove(const int& x_border, const int& y_border);
-    void SetIsMoving(bool is_moving) { is_moving_ = is_moving; }
-    bool GetIsMoving() const { return is_moving_; }
 
-    void SetDirection(int direction) { direction_ = direction; }
-    int GetDirection() const { return direction_; }
+    int get_type() const {return amo_type_;}
+    void set_type(const int& type) {amo_type_ = type;}
 
-    void SetXVal(const int& x_val) { x_val_ = x_val; }
-    void SetYVal(const int& y_val) { y_val_ = y_val; }
-
-    int GetXVal() const { return x_val_; }
-    int GetYVal() const { return y_val_; }
+    bool get_is_move() const {return is_move_;}
+    void set_is_move(bool is_move) {is_move_ = is_move;}
+    void SetWidthHeight(const int& widht, const int& height) {rect_.w = widht; rect_.h = height;}
+    void HandleMoveRightToLeft() ;
 
 private:
     int x_val_;
     int y_val_;
-    bool is_moving_;
-    int direction_; 
+    bool is_move_;
+    int amo_type_;
 };
 
 #endif 

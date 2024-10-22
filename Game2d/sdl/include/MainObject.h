@@ -26,8 +26,6 @@ private:
     int x_val_;
     int y_val_;
     std::vector<BulletObject*> p_bullet_list_; 
-    Uint32 last_shoot_time_; // Thêm biến lưu thời gian bắn cuối
-    const int shoot_interval_ = 300; // Thời gian tối thiểu giữa các lần bắn (500ms) 
 };
 
 #endif  // MAIN_OBJECT_H_

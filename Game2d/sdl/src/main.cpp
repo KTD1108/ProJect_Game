@@ -63,6 +63,8 @@ int main(int argc, char* args[])
     p_threat->SetRect(SCREEN_WIDTH,SCREEN_HEIGHT * 0.3) ;
     p_threat->set_x_val(1) ;
 
+    BulletObject* p_bullet = new BulletObject()  ;
+    p_threat->InitBullet(p_bullet,g_renderer) ;
     bool quit = false;
 
     while (!quit)
@@ -85,8 +87,8 @@ int main(int argc, char* args[])
             human_object.HandleBullet(g_renderer) ;
             p_threat->HandleMove(SCREEN_WIDTH,SCREEN_HEIGHT) ;
             p_threat->Show(g_renderer) ;
+            p_threat->MakeBullet(g_renderer,SCREEN_WIDTH,SCREEN_HEIGHT) ;
             
-      
 
         SDL_RenderPresent(g_renderer); 
     }

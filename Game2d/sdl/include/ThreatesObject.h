@@ -22,11 +22,13 @@ class ThreatObject : public BaseObject
         int get_y_val()const { return y_val_ ;} 
         void SetBulletList(std::vector<BulletObject*> bullet_list) { p_bullet_list_ = bullet_list; }
         std::vector<BulletObject*> GetBulletList() const { return p_bullet_list_; }
-        void InitBullet(BulletObject* p_bullet) ;
+        void InitBullet(BulletObject* p_bullet,SDL_Renderer* g_renderer) ;
+        void MakeBullet(SDL_Renderer* des,const int& x_limit,const& y_limit) ;
     private:
         int x_val_ ;
         int y_val_ ;
         std::vector<BulletObject*> p_bullet_list_;
+        
 };
 
 #endif

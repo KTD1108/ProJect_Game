@@ -9,7 +9,6 @@ MainObject::MainObject()
     rect_.h = HEIGHT_MAIN_OBJECT ;
     x_val_ = 0 ;
     y_val_ = 0 ;
-    last_shoot_time_ = 0;
 }
 
 MainObject::~MainObject()
@@ -34,7 +33,7 @@ void MainObject::HandleBullet(SDL_Renderer* renderer)
         BulletObject* p_bullet = p_bullet_list_[i];
         if (p_bullet != NULL)
         {
-            if (p_bullet->GetIsMoving())
+            if (p_bullet->get_is_move())
             {
                 
                 p_bullet->Show(renderer);
@@ -98,31 +97,30 @@ void MainObject::HandleInputAction(SDL_Event event,SDL_Renderer* renderer)
     {
         if(event.button.button == SDL_BUTTON_LEFT)
         {   
-            Uint32 current_time = SDL_GetTicks();
-            if (current_time - last_shoot_time_ > shoot_interval_){
+            
             p_bullet = new BulletObject(); 
             p_bullet->LoadImg("sphere.png", renderer);
+            p_bullet->SetWidthHeight(WIDTH_SPHERE, HEIGHT_SPHERE);
+            p_bullet->set_type(BulletObject::SPHERE);
             p_bullet->SetRect(rect_.x + rect_.w - 40, rect_.y + rect_.h * 0.8);
-            p_bullet->SetXVal(BULLET_SPEED);
-            p_bullet->SetIsMoving(true);
+            p_bullet->set_is_move(true);
             p_bullet_list_.push_back(p_bullet);
 
-            last_shoot_time_ = current_time;
-            } 
+            
+            
         }
         else if(event.button.button == SDL_BUTTON_RIGHT)
         {
-        Uint32 current_time = SDL_GetTicks();
-            if (current_time - last_shoot_time_ > shoot_interval_){
+            
             p_bullet = new BulletObject(); 
             p_bullet->LoadImg("laser.png", renderer);
             p_bullet->SetRect(rect_.x + rect_.w - 40, rect_.y + rect_.h * 0.8);
-            p_bullet->SetXVal(BULLET_SPEED);
-            p_bullet->SetIsMoving(true);
+            p_bullet->SetWidthHeight(WIDTH_LASER, HEIGHT_LASER);
+            p_bullet->set_type(BulletObject::LASER);
+            p_bullet->set_is_move(true);
             p_bullet_list_.push_back(p_bullet);
 
-            last_shoot_time_ = current_time;
-            } 
+           
         }
         
     }
